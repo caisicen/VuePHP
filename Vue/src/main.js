@@ -1,6 +1,5 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-/* eslint-disable */
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router' // 路由功能
@@ -16,7 +15,7 @@ import moment from 'moment' // 时间插件
 import NProgress from 'nprogress' // 加载进度条
 
 // 配置axios信息
-axios.defaults.baseURL = Window.HOST
+axios.defaults.baseURL = 'http://localhost/tpsisen/public'
 axios.defaults.timeout = 1000 * 15
 axios.defaults.headers.authKey = Lockr.get('authKey')
 axios.defaults.headers.sessionId = Lockr.get('sessionId')
@@ -33,9 +32,13 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
+const bus = new Vue()
+window.bus = bus
+window.axios = axios
+
 new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: {App}
 })
