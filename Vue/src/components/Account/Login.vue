@@ -60,8 +60,15 @@
             this.apiPost('app/Login/login', data).then((res) => {
               if (res.code !== 200) {
                 this.loading = !this.loading
+                let msg;
+                if(res.msg !== undefined){
+                  msg = res.msg;
+                } else {
+                  msg = '暂时无法连接服务器'
+                }
+                console.log(res.msg);
                 this.$message({
-                  message: res.msg,
+                  message: msg,
                   type: 'warning'
                 })
               }
