@@ -1,6 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-/* eslint-disable */
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router' // 路由功能
@@ -14,6 +11,7 @@ import Lockr from 'lockr' // 用于localStorage的API
 import Cookies from 'js-cookie' // 处理cookie的JS API
 import moment from 'moment' // 时间插件
 import NProgress from 'nprogress' // 加载进度条
+import _g from './assets/js/global' // 引入自定义的js函数
 
 // 配置axios信息
 axios.defaults.baseURL = 'http://localhost/tpsisen/public'
@@ -36,6 +34,12 @@ Vue.config.productionTip = false
 const bus = new Vue()
 window.bus = bus
 window.axios = axios
+window.Cookies = Cookies
+window._ = _
+window.Lockr = Lockr
+window.router = router
+window.store = store
+window._g = _g
 
 new Vue({
   el: '#app',

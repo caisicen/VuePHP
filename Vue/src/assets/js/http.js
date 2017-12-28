@@ -103,29 +103,25 @@ const apiMethods = {
         console.log('default error')
       }
     },
-    resetCommonData(data) {
-      _(data.menusList).forEach((res, key) => {
-        if (key == 0) {
-          res.selected = true
-        } else {
-          res.selected = false
-        }
-      })
-      Lockr.set('menus', data.menusList)              // 菜单数据
+    resetCommonData(data,router_Url) {
+      // _(data).forEach((res, key) => {
+      //   if (key == 0) {
+      //     console.log(key)
+      //     console.log(res)
+      //   } else {
+      //     console.log(key)
+      //     console.log(res)
+      //   }
+      // })
       Lockr.set('authKey', data.authKey)              // 权限认证
-      Lockr.set('rememberKey', data.rememberKey)      // 记住密码的加密字符串
-      Lockr.set('authList', data.authList)            // 权限节点列表
       Lockr.set('userInfo', data.userInfo)            // 用户信息
       Lockr.set('sessionId', data.sessionId)          // 用户sessionid
       window.axios.defaults.headers.authKey = Lockr.get('authKey')
-      let routerUrl = ''
-      if (data.menusList[0].url) {
-        routerUrl = data.menusList[0].url
-      } else {
-        routerUrl = data.menusList[0].child[0].child[0].url
-      }
+      let routerUrl = router_Url
       setTimeout(() => {
         let path = this.$route.path
+        console.log(this.$route.path)
+        console.log(this.$route)
         if (routerUrl != path) {
           router.replace(routerUrl)
         } else {

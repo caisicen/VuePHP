@@ -58,19 +58,22 @@
             data.username = this.form.username
             data.password = this.form.password
             this.apiPost('app/Login/login', data).then((res) => {
-              if (res.code !== 200) {
+              if (res.code != 0) {
                 this.loading = !this.loading
                 let msg;
-                if(res.msg !== undefined){
-                  msg = res.msg;
+                if(res.error !== undefined){
+                  msg = res.error;
                 } else {
                   msg = '暂时无法连接服务器'
                 }
-                console.log(res.msg);
                 this.$message({
                   message: msg,
                   type: 'warning'
                 })
+              } else{
+                this.loading = !this.loading
+                this.resetCommonData(res.data,'hello')
+                _g.toastMsg('success', '登录成功')
               }
             })
           }
