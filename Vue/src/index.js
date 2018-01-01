@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/Account/Login.vue'
+import Home from './components/Home.vue'
+import apiList from './components/BaiduAPI/apiList.vue'
 
 Vue.use(Router)
 
@@ -21,6 +23,16 @@ const routes = [
     path: '/Hello',
     name: 'HelloWorld',
     component: HelloWorld
+  },
+  {
+    path: '/Home',
+    component: Home,
+    children: [
+      {
+        path: 'apiList',
+        component:apiList
+      }
+    ]
   }
 ]
 

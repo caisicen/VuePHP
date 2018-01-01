@@ -70,7 +70,7 @@
                 })
               } else{
                 this.loading = !this.loading
-                this.resetCommonData(res.data,'hello')
+                this.resetCommonData(res.data,'Home/apiList')
                 _g.toastMsg('success', '登录成功')
               }
             })

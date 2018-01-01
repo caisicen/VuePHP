@@ -120,8 +120,6 @@ const apiMethods = {
       let routerUrl = router_Url
       setTimeout(() => {
         let path = this.$route.path
-        console.log(this.$route.path)
-        console.log(this.$route)
         if (routerUrl != path) {
           router.replace(routerUrl)
         } else {
