@@ -1,12 +1,14 @@
 <template>
   <el-row>
     <el-col :span="12" v-for="item in apilist" :key="item.id">
-      <el-card :body-style="{ padding: '0px' }">
-        <img src="/src/assets/images/background.png" class="image">
-        <div style="padding: 14px;">
-          <span>{{item.name}}</span>
-        </div>
-      </el-card>
+      <router-link :to="'/Home/api/' + item.url">
+        <el-card :body-style="{ padding: '0px' }">
+          <img src="/src/assets/images/background.png" class="image">
+          <div style="padding: 14px;">
+            <span>{{item.name}}</span>
+          </div>
+        </el-card>
+      </router-link>
     </el-col>
   </el-row>
 
@@ -35,9 +37,9 @@
             message: msg,
             type: 'warning'
           })
-          setTimeout(()=>{
+          setTimeout(() => {
             router.replace('/')
-          },1000)
+          }, 1000)
         } else {
           this.apilist = res.data.list
         }
