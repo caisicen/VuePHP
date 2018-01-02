@@ -66,7 +66,8 @@
           this.remove = false
           return true
         }
-        return this.$confirm(`确定移除 ${ file.name }？`, '提示')
+        return true
+//        return this.$confirm(`确定移除 ${ file.name }？`, '提示')
       },
       // 上传文件错误时处理方法
       handleError () {
@@ -94,7 +95,7 @@
       },
       // 根据列表中的图片，访问后台进行比对
       faceMatch(){
-
+        console.log(123)
       }
     },
     mounted () {
