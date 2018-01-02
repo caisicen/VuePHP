@@ -16,8 +16,8 @@
       <div class="el-upload__tip">只能上传jpg/png文件，且不超过2M</div>
     </el-upload>
     <el-form-item style="margin-top: 30px">
-      <el-button size="small" type="primary" @click="faceMatch()">比对</el-button>
-      <el-button size="small" type="info" @click="resetUpload()">重置</el-button>
+      <el-button size="big" type="primary" @click="faceMatch()" v-loading="loading">比对</el-button>
+      <el-button size="big" type="info" @click="resetUpload()">重置</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -34,6 +34,7 @@
         requestData: {'type': 'img'}, // 请求体的数据
         limit: 3, // 限制的文件个数
         remove: false, // 是否移除，供校验不通过时自动移除使用，否则还是会出法移除方法的提示
+        loading: false, // 提交按钮的加载状态
       }
     },
     methods: {
@@ -57,15 +58,16 @@
             this.$message.error('上传的图片有误，请重新上传')
           }
           this.remove = true
-          return false
+          return true
         }
       },
       // 移除文件时处理方法
       beforeRemove (file, fileList) {
-        if (this.remove) { // 校验不通过进行移除文件，不触发提示
-          this.remove = false
-          return true
-        }
+//        if (this.remove) { // 校验不通过进行移除文件，不触发提示
+//          this.remove = false
+//          return true
+//        }
+        this.fileList3 = fileList
         return true
 //        return this.$confirm(`确定移除 ${ file.name }？`, '提示')
       },
@@ -95,7 +97,16 @@
       },
       // 根据列表中的图片，访问后台进行比对
       faceMatch(){
-        console.log(123)
+        if(this.loading){
+          return
+        }
+        if(this.fileList3.length > 1) {
+          this.loading = !this.loading
+          console.log(this.fileList3.length)
+          console.log(this.fileList3)
+        } else {
+          this.$message.warning('最少需要两张照片进行比对')
+        }
       }
     },
     mounted () {
