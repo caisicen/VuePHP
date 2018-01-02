@@ -52,6 +52,31 @@ const commonFn = {
       let authList = moduleRule + Lockr.get('authList')
       return _.includes(authList, val)
     }
+  },
+  handleRes(response){ // 处理返回的http响应结果
+    if(response.code != 0){
+      let msg;
+      if (response.error !== undefined) {
+        msg = response.error;
+      } else {
+        msg = '暂时无法连接服务器'
+      }
+      bus.$message({
+        message: msg,
+        type: 'warning'
+      })
+      if(response.code == 302){ // 302设置重定向跳转
+        let url = "/"
+        if(response.data.redirectURL !== undefined){
+          url = response.data.redirectURL
+        }
+        setTimeout(() => {
+          router.replace(url)
+        }, 1000)
+      }
+      return false
+    }
+    return true
   }
 }
 

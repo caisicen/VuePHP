@@ -1,9 +1,9 @@
 <template>
   <el-row>
     <el-col :span="12" v-for="item in apilist" :key="item.id">
-      <router-link :to="'/Home/api/' + item.url">
+      <router-link :to=item.url>
         <el-card :body-style="{ padding: '0px' }">
-          <img src="/src/assets/images/background.png" class="image">
+          <img src="/src/assets/images/test.png" class="image">
           <div style="padding: 14px;">
             <span>{{item.name}}</span>
           </div>
@@ -20,27 +20,13 @@
   export default {
     data() {
       return {
-        apilist: [{id: '', name: '网络问题，暂无数据'}],
+        apilist: [{id: '', name: '网络问题，暂无数据', url: ''}],
         currentDate: new Date()
       }
     },
     mounted() {
       this.apiPost('app/BaiduAPI/apiList').then((res) => {
-        if (res.code != 0) {
-          let msg;
-          if (res.error !== undefined) {
-            msg = res.error;
-          } else {
-            msg = '暂时无法连接服务器'
-          }
-          this.$message({
-            message: msg,
-            type: 'warning'
-          })
-          setTimeout(() => {
-            router.replace('/')
-          }, 1000)
-        } else {
+        if(_g.handleRes(res)){
           this.apilist = res.data.list
         }
       });

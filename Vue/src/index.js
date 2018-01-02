@@ -4,6 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/Account/Login.vue'
 import Home from './components/Home.vue'
 import apiList from './components/BaiduAPI/apiList.vue'
+import faceMatch from './components/BaiduAPI/faceMatch.vue'
 
 Vue.use(Router)
 
@@ -28,10 +29,8 @@ const routes = [
     path: '/Home',
     component: Home,
     children: [
-      {
-        path: 'apiList',
-        component:apiList
-      }
+      {path: 'apiList', component: apiList},
+      {path: 'faceMatch', component: faceMatch},
     ]
   }
 ]
