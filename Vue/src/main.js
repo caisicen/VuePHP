@@ -14,7 +14,7 @@ import NProgress from 'nprogress' // 加载进度条
 import _g from './assets/js/global' // 引入自定义的js函数
 
 // 配置axios信息
-axios.defaults.baseURL = 'http://localhost/tpsisen/public'
+axios.defaults.baseURL = 'http://192.168.5.140/tpsisen/public'
 axios.defaults.timeout = 1000 * 15
 axios.defaults.headers.authKey = Lockr.get('authKey')
 axios.defaults.headers.sessionId = Lockr.get('sessionId')
@@ -44,6 +44,7 @@ window._g = _g
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: {App}
 })

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import http from '../../assets/js/http'
 
   export default {
     data () {
@@ -58,7 +59,7 @@
             this.$message.error('上传的图片有误，请重新上传')
           }
           this.remove = true
-          return true
+          return false
         }
       },
       // 移除文件时处理方法
@@ -92,18 +93,29 @@
         this.$message.warning('一次最多只能比对' + this.limit + '张照片')
       },
       // 重置已选文件方法
-      resetUpload(){
+      resetUpload () {
         this.$refs.upload.clearFiles()
+        this.loading = false
       },
       // 根据列表中的图片，访问后台进行比对
-      faceMatch(){
-        if(this.loading){
+      faceMatch () {
+        if (this.loading) {
+          this.$message.warning('正在比对中，请勿重复提交')
           return
         }
-        if(this.fileList3.length > 1) {
+        if (this.fileList3.length > 1) {
           this.loading = !this.loading
-          console.log(this.fileList3.length)
-          console.log(this.fileList3)
+          let matchImg = []
+          this.fileList3.forEach((value, index) => {
+            matchImg.push({fileSrc: value.response.data.fileSrc, name: value.name})
+          })
+          let data = {matchImg: matchImg}
+          this.apiPost('app/baiduapi/faceMatch', data).then((res) => {
+            this.loading = !this.loading
+            if(_g.handleRes(res)){
+
+            }
+          })
         } else {
           this.$message.warning('最少需要两张照片进行比对')
         }
@@ -112,7 +124,8 @@
     mounted () {
       this.fileWeb = axios.defaults.baseURL + '/app/FileAPI/upload'
       this.myHeaders = {'authKey': Lockr.get('authKey')}
-    }
+    },
+    mixins: [http]
   }
 </script>
 
