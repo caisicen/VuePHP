@@ -33,7 +33,7 @@
         fileWeb: '', // 图片上传的url
         myHeaders: {}, // 请求头
         requestData: {'type': 'img'}, // 请求体的数据
-        limit: 3, // 限制的文件个数
+        limit: 5, // 限制的文件个数
         remove: false, // 是否移除，供校验不通过时自动移除使用，否则还是会出法移除方法的提示
         loading: false, // 提交按钮的加载状态
       }
@@ -44,7 +44,7 @@
         try {
           let limitSize = 2 // 运行单个文件的大小,M
           const isIMG = (file.type === 'image/png' || file.type === 'image/jpeg' )
-          const isLtSize = (file.size / 1024 / 1024 < 2)
+          const isLtSize = (file.size / 1024 / 1024 < 20)
           if (!isIMG) {
             throw '只能上传jpg或者png格式图片'
           }

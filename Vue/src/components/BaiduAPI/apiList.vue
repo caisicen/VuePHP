@@ -3,7 +3,7 @@
     <el-col :span="12" v-for="item in apilist" :key="item.id">
       <router-link :to=item.url>
         <el-card :body-style="{ padding: '0px' }">
-          <img src="/src/assets/images/test.png" class="image">
+          <img src="../../assets/images/test.png" class="image">
           <div style="padding: 14px;">
             <span>{{item.name}}</span>
           </div>
