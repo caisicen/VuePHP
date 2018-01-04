@@ -23,7 +23,7 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 // 配置路由
 const router = new VueRouter({
   mode: 'history',
-  base: '/',
+  base: '/app/',
   routes
 })
 
