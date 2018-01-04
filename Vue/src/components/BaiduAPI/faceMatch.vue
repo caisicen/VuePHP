@@ -112,8 +112,9 @@
           let data = {matchImg: matchImg}
           this.apiPost('app/baiduapi/faceMatch', data).then((res) => {
             this.loading = !this.loading
-            if(_g.handleRes(res)){
-
+            if (_g.handleRes(res)) {
+              this.$store.commit('setMatchFace', res.data)
+              this.$router.push({path: '/Home/apiRes/matchFace'})
             }
           })
         } else {

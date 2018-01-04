@@ -1,11 +1,5 @@
 const state = {
-  showLeftMenu: true,
-  globalLoading: true,
-  menus: [],
-  rules: [],
-  users: {},
-  userGroups: [],
-  organizes: []
+  matchFace: []
 }
 
 export default state
