@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
 import apiList from './components/BaiduAPI/apiList.vue'
 import apiRes from './components/BaiduAPI/apiRes.vue'
 import faceMatch from './components/BaiduAPI/faceMatch.vue'
+import Page404 from './components/Page404.vue'
 
 Vue.use(Router)
 
@@ -17,24 +18,25 @@ Vue.use(Router)
  */
 const routes = [
   {
-    path: '/',
+    path: '*/',
     name: 'Login',
     component: Login
   },
   {
-    path: '/Hello',
+    path: '*/Hello',
     name: 'HelloWorld',
     component: HelloWorld
   },
   {
-    path: '/Home',
+    path: '*/Home',
     component: Home,
     children: [
       {path: 'apiList', component: apiList},
       {path: 'faceMatch', component: faceMatch},
       {path: 'apiRes/:type', component: apiRes}
     ]
-  }
+  },
+  {path: '*', component: Page404}
 ]
 
 export default routes
